@@ -1,0 +1,13 @@
+---
+controller_projects:
+  - name: Test Wipro Project
+    organization: Wipro
+    description: Created by Wipro Ansible Playbook
+    scm_branch: main
+    scm_clean: no
+    scm_delete_on_update: no
+    scm_type: git
+    scm_update_on_launch: 'yes'
+    scm_url: 'https://github.com/amitmohan1786/aap-demo.git'
+    notification_templates_error:
+      -Slack_for_testing

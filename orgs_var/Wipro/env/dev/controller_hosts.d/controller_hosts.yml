@@ -1,0 +1,7 @@
+---
+controller_hosts:
+  - name: sdxdclhsbcaap.sdxtest.local
+    inventory: Dev-AAP-controller
+    variables:
+      some_var: some_val
+      ansible_connection: local

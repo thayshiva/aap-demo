@@ -1,0 +1,74 @@
+---
+- name: Playbook to configure the controller post installation
+  hosts: localhost
+  connection: local
+  gather_facts: false  
+  pre_tasks:
+    - name: Print current working directory
+      ansible.builtin.command: pwd
+      register: pwd_output
+      
+    - debug:
+        var: pwd_output.stdout
+        
+    - name: Set vars
+      set_fact:
+        orgs: "{{ orgs }}"
+        env: "{{ env }}"
+        controller_hostname: "{{ controller_hostname }}"
+        controller_username: "{{ ansible_user }}"
+        controller_password: "{{ ansible_password }}"
+      no_log: true
+        
+    - name: "Setup authentication (block)"
+      vars:
+        controller_hostname: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+      block:
+      - name: "Get the Authentication Token for the future requests"
+        vars:
+          controller_hostname: "{{ controller_hostname }}"
+          controller_username: "{{ controller_username }}"
+          controller_password: "{{ controller_password }}"
+        ansible.builtin.uri:
+          url: "https://{{ controller_hostname }}/api/v2/tokens/"
+          user: "{{ controller_username }}"
+          password: "{{ controller_password }}"
+          method: POST
+          force_basic_auth: true
+          validate_certs: False
+          status_code: 201
+        register: authtoken_res
+        
+      - name: "Set the oauth token to be used since now"
+        ansible.builtin.set_fact:
+          controller_oauthtoken: "{{ authtoken_res.json.token }}"
+          controller_oauthtoken_url: "{{ authtoken_res.json.url }}"
+        no_log: true
+      when: controller_oauthtoken is not defined
+      tags:
+        - always
+        
+  roles:
+    - name: Load variables using filetree_read
+      role: infra.controller_configuration.filetree_read
+      vars:
+        orgs: "{{ orgs }}"
+        env: "{{ env }}"
+        controller_hostname: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+      tags:
+        - apply_config
+        
+    - name: Apply teams configuration using dispatch
+      role: infra.controller_configuration.dispatch
+      vars:
+        controller_hostname: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+        controller_configuration_dispatcher_roles:
+          - {role: teams, var: controller_teams, tags: teams}
+      tags:
+        - teams
