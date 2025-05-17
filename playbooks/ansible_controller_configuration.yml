@@ -20,7 +20,7 @@
         msg: "controller_username: {{ ansible_user }}"
     - debug:
         msg: "controller_password: {{ ansible_password }}"
-      no_log: true
+      no_log: false
     - name: Set vars
       set_fact:
         orgs: "{{ orgs }}"
