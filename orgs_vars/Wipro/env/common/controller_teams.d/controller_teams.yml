@@ -12,5 +12,5 @@ controller_teams:
   - name: Wipro devloper Team
     organization: Wipro
     description: Wipro developer Team
-    state: present
+    state: absent
     
