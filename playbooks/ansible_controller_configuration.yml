@@ -69,6 +69,7 @@
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
         controller_configuration_dispatcher_roles:
-          - {role: teams, var: controller_teams, tags: teams}
+          #- {role: teams, var: controller_teams, tags: teams}
+          - {role: organizations, var: controller_organizations, tags: organizations}
       tags:
         - teams
