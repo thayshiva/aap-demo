@@ -6,7 +6,7 @@ controller_teams:
 
   - name: HSBC Platform Team
     organization: Wipro
-    description: HSBC Platform Teams
+    description: HSBC Platform Team
     state: present
 
   - name: Wipro devloper Team
