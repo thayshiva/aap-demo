@@ -6,11 +6,11 @@ controller_teams:
 
   - name: HSBC Platform Team
     organization: Wipro
-    description: HSBC Platform Team
+    description: HSBC Platform Teams
     state: present
 
   - name: Wipro devloper Team
     organization: Wipro
     description: Wipro developer Team
-    state: absent
+    state: present
     
