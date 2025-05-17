@@ -10,7 +10,17 @@
       
     - debug:
         var: pwd_output.stdout
-        
+    - debug:
+        msg: "orgs: {{ orgs }}"
+    - debug:
+        msg: "env: {{ env }}"
+    - debug:
+        msg: "controller_hostname: {{ controller_hostname }}"
+    - debug:
+        msg: "controller_username: {{ ansible_user }}"
+    - debug:
+        msg: "controller_password: {{ ansible_password }}"
+      no_log: true
     - name: Set vars
       set_fact:
         orgs: "{{ orgs }}"
