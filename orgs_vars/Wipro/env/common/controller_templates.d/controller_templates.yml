@@ -1,0 +1,12 @@
+---
+controller_templates:
+- name: Demo Template CasC
+  job_type: run
+  inventory: Demo Inventory
+  project: controller Config
+  playbook: helloworld.yml
+  credentials:
+  - Demo Credential
+  survey: {}
+  notification_templates_error:
+  - Slack_for_testing
