@@ -74,7 +74,7 @@
         controller_configuration_dispatcher_roles:
           #- {role: teams, var: controller_teams, tags: teams}
           # - {role: organizations, var: controller_organizations, tags: organizations}
-          - {role: templates, var: controller_templates, tags: templates}
+          - {role: job_templates, var: controller_templates, tags: templates}
           #- {role: projects, var: controller_projects, tags: projects}
       tags:
         - teams
