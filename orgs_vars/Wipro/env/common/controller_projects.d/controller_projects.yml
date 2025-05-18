@@ -10,4 +10,4 @@ controller_projects:
     scm_update_on_launch: 'yes'
     scm_url: 'https://github.com/thayshiva/aap-demo.git'
     notification_templates_error:
-      -Slack_for_testing
+      - Slack_for_testing
