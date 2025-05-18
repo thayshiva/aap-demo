@@ -51,26 +51,31 @@
         - always
         
   roles:
-    - name: Load variables using filetree_read
-      role: infra.controller_configuration.filetree_read
-      vars:
-        orgs: "{{ orgs }}"
-        env: "{{ env }}"
-        controller_hostname: "{{ controller_hostname }}"
-        controller_username: "{{ controller_username }}"
-        controller_password: "{{ controller_password }}"
-      tags:
-        - apply_config
-        
-    - name: Apply teams configuration using dispatch
-      role: infra.controller_configuration.dispatch
-      vars:
-        controller_hostname: "{{ controller_hostname }}"
-        controller_username: "{{ controller_username }}"
-        controller_password: "{{ controller_password }}"
-        controller_configuration_dispatcher_roles:
-          #- {role: teams, var: controller_teams, tags: teams}
-          # - {role: organizations, var: controller_organizations, tags: organizations}
-          - {role: projects, var: controller_projects, tags: projects}
-      tags:
-        - teams
+    - name: below block is using filetree_read and dispath role
+      block:
+        - name: Load variables using filetree_read
+          role: infra.controller_configuration.filetree_read
+          vars:
+            orgs: "{{ orgs }}"
+            env: "{{ env }}"
+            controller_hostname: "{{ controller_hostname }}"
+            controller_username: "{{ controller_username }}"
+            controller_password: "{{ controller_password }}"
+          tags:
+            - apply_config
+            
+        - name: Apply teams configuration using dispatch
+          role: infra.controller_configuration.dispatch
+          vars:
+            controller_hostname: "{{ controller_hostname }}"
+            controller_username: "{{ controller_username }}"
+            controller_password: "{{ controller_password }}"
+            controller_configuration_dispatcher_roles:
+              #- {role: teams, var: controller_teams, tags: teams}
+              - {role: organizations, var: controller_organizations, tags: organizations}
+              #- {role: projects, var: controller_projects, tags: projects}
+          tags:
+            - teams
+      when:
+        - use_filetree_read is defined
+        - use_filetree_read
