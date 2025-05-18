@@ -1,0 +1,23 @@
+---
+- name: playbook to create project 
+  hosts: localhost
+  gather_facts: false
+  pre_tasks:
+    - name: Set vars
+      ansible.builtin.set_fact:
+        controller_hostname: "{{ controller_hostname }}"
+        controller_username: "{{ ansible_user }}"
+        controller_password: "{{ ansible_password }}"
+      no_log: true
+    - name: include project specific vars
+      ansible.builtin.include_vars:
+        dir: "../environments/{{ aap_env }}projects.d"
+        extensions: [ "yml" ]
+
+  roles:
+    - name: Apply teams configuration using specific role
+      role: infra.controller_configuration.projects
+      vars:
+        controller_hostname: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
