@@ -11,13 +11,14 @@
       no_log: true
     - name: include project specific vars
       ansible.builtin.include_vars:
-        dir: "../environments/{{ aap_env }}projects.d"
+        dir: "{{ dir_orgs_vars }}/Wipro/env/common/controller_templates.d"
         extensions: [ "yml" ]
 
   roles:
     - name: Apply teams configuration using specific role
-      role: infra.controller_configuration.projects
+      role: infra.controller_configuration.job_templates
       vars:
         controller_hostname: "{{ controller_hostname }}"
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
+
