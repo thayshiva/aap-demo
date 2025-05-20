@@ -1,5 +1,12 @@
 ---
 controller_organizations:
-  - name: Wipro-Test
-    description: This is the demo organization
+  - name: Wipro-Test-1
+    description: This is the demo org-1
+    state: present
+  - name: Wipro-Test-2
+    description: This is the demo org-2
+    state: absent   
+  - name: Wipro-Test-3
+    description: This is the demo org-3
+    state: present
     
