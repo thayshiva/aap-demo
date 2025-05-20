@@ -61,9 +61,6 @@
         controller_password: "{{ controller_password }}"
       tags:
         - apply_config
-      when:
-        - use_filetree_read is defined
-        - use_filetree_read
         
     - name: Apply teams configuration using dispatch
       role: infra.controller_configuration.dispatch
@@ -72,12 +69,8 @@
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
         controller_configuration_dispatcher_roles:
-          #- {role: teams, var: controller_teams, tags: teams}
-          # - {role: organizations, var: controller_organizations, tags: organizations}
-          - {role: job_templates, var: controller_templates, tags: templates}
-          #- {role: projects, var: controller_projects, tags: projects}
+          - {role: teams, var: controller_teams, tags: teams}
+          # - {role: projects, var: controller_projects, tags: projects}
+          - {role: organizations, var: controller_organizations, tags: organizations}
       tags:
         - teams
-      when:
-        - use_filetree_read is defined
-        - use_filetree_read
