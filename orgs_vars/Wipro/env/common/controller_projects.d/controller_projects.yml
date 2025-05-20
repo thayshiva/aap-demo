@@ -8,6 +8,7 @@ controller_projects:
     scm_delete_on_update: no
     scm_type: git
     scm_update_on_launch: 'yes'
-    scm_url: 'https://github.com/thayshiva/aap-demo.git'
-    notification_templates_error:
-      - Slack_for_testing
+    scm_url: 'http://gitlab.sdxtest.local/thayum/aap-demo.git'
+    # notification_templates_error:
+    # - Slack_for_testing
+
