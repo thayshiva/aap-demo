@@ -1,12 +1,17 @@
 ---
 controller_templates:
-- name: Demo Template CasC
-  job_type: run
-  inventory: Demo Inventory
-  project: controller Config
-  playbook: helloworld.yml
-  credentials:
-  - Demo Credential
-  survey: {}
-  notification_templates_error:
-  - Slack_for_testing
+  - name: Test Wipro Template
+    job_type: run
+    inventory: Demo Inventory
+    execution_environment: Automation Hub Default execution environment
+    project: Demo Project v1 gitlab
+    playbook: playbooks/configure_job_templates.yml
+    state: absent
+    
+  - name: Test HSBC Template
+    job_type: run
+    inventory: Demo Inventory
+    execution_environment: Automation Hub Default execution environment
+    project: Demo Project v1 gitlab
+    playbook: playbooks/configure_job_templates.yml
+    state: present
